@@ -43,8 +43,14 @@ test:
 about:
   home: http://vispy.org/
   license: BSD 3-Clause
+  license_family: BSD
   license_file: LICENSE.txt
-  summary: 'VisPy is a high-performance interactive 2D/3D data visualization library.'
+  summary: High performance interactive 2D/3D data visualization.
+  description: |
+    VisPy is a Python library for interactive scientific visualization that is
+    designed to be fast, scalable, and easy to use.
+  doc_url: http://vispy.org/documentation.html
+  dev_url: https://github.com/vispy/vispy
 
 extra:
   recipe-maintainers:
