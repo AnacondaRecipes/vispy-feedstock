@@ -25,6 +25,7 @@ requirements:
   run:
     - python
     - {{ pin_compatible('numpy') }}
+    - cython
     # Will be taken care of by run_exports
     # - fontconfig  # [unix]
 
