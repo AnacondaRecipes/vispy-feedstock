@@ -23,6 +23,7 @@ requirements:
     - fontconfig  # [unix]
     - cython
     - pip
+    - setuptools-scm-git-archive
 
   run:
     - python
