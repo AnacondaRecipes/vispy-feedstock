@@ -22,6 +22,7 @@ requirements:
     - numpy
     - fontconfig  # [unix]
     - cython
+    - pip
 
   run:
     - python
