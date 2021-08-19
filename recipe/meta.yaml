@@ -1,4 +1,4 @@
-{% set version = "0.5.3" %}
+{% set version = "0.7.3" %}
 
 package:
   name: vispy
@@ -7,31 +7,40 @@ package:
 source:
   fn: vispy-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/v/vispy/vispy-{{ version }}.tar.gz
-  sha256: f6c36408df851b91322c928aadb2c8aaf3b31150e11f723784cc81b6280fdcc0
+  sha256: 1edd3434247577e0910f9c76331b82a54be7e5381c022120c7336e73167b155c
   patches:
     - ctypes_fontconfig.diff
 
 build:
   number: 0
-  script: python setup.py install --single-version-externally-managed --record record.txt
+  script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
+    - pip
     - python
     - setuptools
+    - setuptools_scm
+    - setuptools_scm_git_archive
     - numpy
     - fontconfig  # [unix]
+    - cython
 
   run:
     - python
     - {{ pin_compatible('numpy') }}
-    # Will be taken care of by run_exports
-    # - fontconfig  # [unix]
+    - fontconfig  # [unix]
+    - freetype-py
+    - hsluv
+    - kiwisolver
 
 test:
   imports:
     - vispy
-  # todo: check headless testing
+    # make sure that platform-specific dpi functions can be imported
+    - vispy.util.dpi
+    - vispy.util.fonts
+    # todo: check headless testing
   #requires:
   #  - pyqt 4.*
   #commands:
