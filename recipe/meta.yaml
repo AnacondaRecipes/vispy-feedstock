@@ -33,7 +33,6 @@ requirements:
     - numpy
     - fontconfig  # [unix]
     - cython >=0.29.2
-    - compiler
     - packaging
     - wheel
 
