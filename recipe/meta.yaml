@@ -15,9 +15,7 @@ source:
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . -vv
-  ignore_run_exports:
-    - fontconfig
-    - python
+  skip: True  # [py<36]
 
 requirements:
   build:
