@@ -1,5 +1,5 @@
 {% set name = "vispy" %}
-{% set version = "0.12.1" %}
+{% set version = "0.14.3" %}
 
 package:
   name: vispy
@@ -8,17 +8,14 @@ package:
 source:
   fn: vispy-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: e00881c1d0f9b2c08eb6e26e9361adbde8a3a96e7878ee6c1e199e7c5872224f
+  sha256: efbbb847a908baf7e7169ab9bf296138a39364f367e6cb0a8ec03ad71699d31d
   patches:
     - ctypes_fontconfig.diff
 
 build:
   number: 0
-  script: {{ PYTHON }} -m pip install . -vv
-  skip: True  # [py<36]
-  ignore_run_exports:
-    - fontconfig
-    - python
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
+  skip: True  # [py<39]
 
 requirements:
   build:
@@ -28,18 +25,17 @@ requirements:
   host:
     - pip
     - python
-    - setuptools >=30.3.0
+    - setuptools >=42
     - setuptools_scm
-    - setuptools_scm_git_archive
-    - numpy
+    - numpy >=2
     - fontconfig  # [unix]
-    - cython >=0.29.2
+    - cython >=3.0.0
     - packaging
     - wheel
 
   run:
     - python
-    - {{ pin_compatible('numpy') }}
+    - numpy
     - fontconfig  # [unix]
     - freetype-py
     - hsluv
@@ -52,15 +48,15 @@ test:
     # make sure that platform-specific dpi functions can be imported
     - vispy.util.dpi
     - vispy.util.fonts
-    # todo: check headless testing
-  #requires:
-  #  - pyqt 4.*
-  #commands:
-  #  - python -c "import vispy; print(vispy.sys_info()); vispy.test()"
+  requires:
+   - pip
+  # Only needed for the local UI testing. 
+  #  - pyqt
+  #  - pytest
   commands:
     - pip check
-  requires:
-    - pip
+    # Run the test suite, but requires a display. This is not possible in CI.
+    # - python -c "import vispy; print(vispy.sys_info()); vispy.test()"
 
 about:
   home: https://vispy.org/
