@@ -28,7 +28,7 @@ requirements:
     - pip
     - python
     - setuptools >=42
-    - setuptools_scm
+    - setuptools_scm >=7.1
     - numpy >=2
     - fontconfig  # [unix]
     - cython >=3.0.0
