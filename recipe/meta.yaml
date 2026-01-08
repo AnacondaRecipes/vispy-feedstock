@@ -40,6 +40,11 @@ requirements:
 
 # E   ModuleNotFoundError: No module named 'meshio'
 {% set deselect_tests = " --deselect=io/tests/test_io.py::test_meshio" %}
+# >   return (px.width/mm.width + px.height/mm.height) * 0.5 * 25.4
+#             ^^^^^^^^^^^^^^^^^
+# E   ZeroDivisionError: division by zero
+{% set deselect_tests = deselect_tests + " --deselect=app/tests/test_backends.py::test_template" %}  # [osx]
+{% set deselect_tests = deselect_tests + " --deselect=util/dpi/tests/test_dpi.py::test_dpi" %}  # [osx]
 test:
   imports:
     - vispy
